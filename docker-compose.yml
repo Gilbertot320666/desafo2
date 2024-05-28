@@ -11,7 +11,13 @@ services:
     depends_on:
       - nodejs
   nodejs:
-    build: .
+    image: node:latest
+    working_dir: /usr/src/app
+    volumes:
+      - ./app:/usr/src/app
+    expose:
+      - "3000"
+    command: ["node", "index.js"]
     environment:
       - MYSQL_HOST=db
       - MYSQL_USER=root
