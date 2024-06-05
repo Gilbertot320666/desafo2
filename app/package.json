@@ -1,25 +1,15 @@
 {
-  "name": "desafo2",
+  "name": "node-hello-world",
   "version": "1.0.0",
+  "description": "Hello World app with Node.js and Express",
   "main": "app.js",
+  "scripts": {
+    "start": "node app.js"
+  },
   "dependencies": {
     "express": "^4.19.2",
-    "mysql": "^2.18.1"
-  },
-  "devDependencies": {},
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/Gilbertot320666/desafo2.git"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/Gilbertot320666/desafo2/issues"
-  },
-  "homepage": "https://github.com/Gilbertot320666/desafo2#readme",
-  "description": ""
+    "index.js": "0.0.3",
+    "mysql": "^2.18.1",
+    "node": "^20.14.0"
+  }
 }

@@ -11,13 +11,10 @@ services:
     depends_on:
       - nodejs
   nodejs:
-    image: node:latest
-    working_dir: /usr/src/app
+    build: .
     volumes:
       - ./app:/usr/src/app
-    expose:
-      - "3000"
-    command: ["node", "index.js"]
+      - /usr/src/app/node_modules      
     environment:
       - MYSQL_HOST=db
       - MYSQL_USER=root
@@ -44,4 +41,3 @@ services:
 networks:
   node-network:
     driver: bridge
-
