@@ -17,8 +17,8 @@ services:
       - /usr/src/app/node_modules      
     environment:
       - MYSQL_HOST=db
-      - MYSQL_USER=root
-      - MYSQL_PASSWORD=root
+      - MYSQL_USER=test
+      - MYSQL_PASSWORD=test
       - MYSQL_DATABASE=fullcycle
     networks:
       - node-network
@@ -26,17 +26,25 @@ services:
       - db
   db:
     image: mysql:5.7
-    command: --innodb-use-native-aio=0
     container_name: db
     restart: always
     tty: true
     volumes:
       - ./mysql:/var/lib/mysql
+      - ./sql/init.sql:/docker-entrypoint-initdb.d/init.sql
     networks:
       - node-network
     environment:
-      MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: fullcycle
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_USER=test
+      - MYSQL_PASSWORD=test
+      - MYSQL_DATABASE=fullcycle
+
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 10s
+      retries: 5    
+
 
 networks:
   node-network:
