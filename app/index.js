@@ -6,8 +6,8 @@ const app = express();
 // Configuração do banco de dados MySQL usando o nome do serviço 'db'
 const config = {
   host: 'db',
-  user: 'root',
-  password: 'root',
+  user: 'test',
+  password: 'test',
   database: 'fullcycle'
 };
 
