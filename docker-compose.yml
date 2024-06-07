@@ -2,6 +2,7 @@ version: '3'
 services:
   nginx:
     image: nginx:latest
+    restart: always
     ports:
       - "80:80"
     volumes:
@@ -12,6 +13,7 @@ services:
       - nodejs
   nodejs:
     build: .
+    restart: always
     volumes:
       - ./app:/usr/src/app
       - /usr/src/app/node_modules      
@@ -20,10 +22,14 @@ services:
       - MYSQL_USER=test
       - MYSQL_PASSWORD=test
       - MYSQL_DATABASE=fullcycle
+    
+    entrypoint: dockerize -wait tcp://db:3306 -timeout 200s docker-entrypoint.sh
+    command: ["node", "index.js"]
     networks:
       - node-network
-    depends_on:
+    depends_on:    
       - db
+
   db:
     image: mysql:5.7
     container_name: db
@@ -39,12 +45,6 @@ services:
       - MYSQL_USER=test
       - MYSQL_PASSWORD=test
       - MYSQL_DATABASE=fullcycle
-
-    healthcheck:
-      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
-      interval: 10s
-      retries: 12    
-
 
 networks:
   node-network:

@@ -1,5 +1,6 @@
 const express = require('express');
 const mysql = require('mysql');
+const { exit } = require('process');
 
 const app = express();
 
@@ -20,7 +21,7 @@ app.get('/', (req, res) => {
       if (error) {
         console.error('Erro ao buscar nomes na tabela:', error);
         res.status(500).send('Erro ao buscar nomes na tabela');
-        return;
+        exit(1);
       }
 
       let response = '<h1>Full Cycle Rocks!</h1>';
